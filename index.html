@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>余泊 Yohaku — 海辺の古民家で、暮らすように泊まる</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1612;
+    --paper: #f5f0e8;
+    --sea: #4a7c8e;
+    --sea-light: #7aa8b8;
+    --wood: #8b6f47;
+    --wood-light: #c4a882;
+    --mist: #e8e0d0;
+    --white: #fdfaf5;
+    --accent: #c0622d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 100svh;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('bay-dusk.jpg');
+    background-size: cover;
+    background-position: center 40%;
+    transform: scale(1.05);
+    animation: slowZoom 20s ease-in-out infinite alternate;
+  }
+  @keyframes slowZoom {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.12); }
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(26,22,18,0.1) 0%,
+      rgba(26,22,18,0.3) 40%,
+      rgba(26,22,18,0.8) 80%,
+      rgba(26,22,18,0.95) 100%
+    );
+  }
+  .hero-badge {
+    position: absolute;
+    top: 6vh; left: 6vw;
+    z-index: 3;
+    animation: fadeIn 1.2s ease forwards;
+  }
+  .hero-badge-main {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    color: var(--white);
+    letter-spacing: 0.2em;
+  }
+  .hero-badge-sub {
+    font-size: 0.65rem;
+    color: var(--wood-light);
+    letter-spacing: 0.25em;
+    margin-top: 0.3rem;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 6vw 10vh;
+    max-width: 780px;
+  }
+  .hero-eyebrow {
+    font-size: clamp(0.7rem, 2vw, 0.85rem);
+    color: var(--wood-light);
+    letter-spacing: 0.25em;
+    margin-bottom: 1rem;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+  .hero-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(2.6rem, 8vw, 5.5rem);
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.6s forwards;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--wood-light);
+    display: block;
+    font-size: 0.55em;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    margin-top: 0.3em;
+  }
+  .hero-sub {
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    color: rgba(253,250,245,0.78);
+    font-weight: 300;
+    line-height: 2;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.8s forwards;
+  }
+  .hero-cta {
+    display: inline-block;
+    padding: 0.9em 2.5em;
+    background: var(--accent);
+    color: var(--white);
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 1s forwards;
+  }
+  .hero-cta:hover { background: #a5521f; transform: translateY(-2px); }
+
+  /* ── SECTION BASE ── */
+  .section-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 6vw;
+  }
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    color: var(--wood);
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+  }
+  .section-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.45;
+    margin-bottom: 1.5rem;
+  }
+  .section-body {
+    font-size: clamp(0.88rem, 2.5vw, 1rem);
+    line-height: 2.1;
+    color: #3a3028;
+    font-weight: 300;
+  }
+
+  /* ── AFFINITY ── */
+  .affinity { background: var(--ink); padding: 12vw 0; }
+  .affinity .section-title { color: var(--white); }
+  .affinity .section-body { color: rgba(253,250,245,0.68); }
+  .affinity .section-label { color: var(--wood-light); }
+  .affinity-quote {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    color: var(--wood-light);
+    line-height: 1.8;
+    border-left: 3px solid var(--accent);
+    padding-left: 1.5rem;
+    margin: 3rem 0;
+  }
+
+  /* ── CONCEPT ── */
+  .concept { padding: 12vw 0; background: var(--white); }
+  .concept-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 4rem;
+  }
+  .concept-card {
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--mist);
+    position: relative;
+    transition: background 0.3s ease;
+  }
+  .concept-card:hover { background: var(--paper); }
+  .concept-number {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 2.8rem;
+    color: var(--mist);
+    position: absolute;
+    top: 1rem; right: 1.2rem;
+    line-height: 1;
+  }
+  .concept-card-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+  }
+  .concept-card-body {
+    font-size: 0.87rem;
+    line-height: 1.9;
+    color: #5a5048;
+    font-weight: 300;
+  }
+
+  /* ── PHOTO SPLIT ── */
+  .photo-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 60vh;
+  }
+  .photo-split-img {
+    position: relative;
+    overflow: hidden;
+  }
+  .photo-split-img img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.6s ease;
+  }
+  .photo-split-img:hover img { transform: scale(1.04); }
+  .photo-split-text {
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6vw;
+  }
+  .photo-split-text .section-title { color: var(--white); }
+  .photo-split-text .section-body { color: rgba(253,250,245,0.7); }
+  .photo-split-text .section-label { color: var(--wood-light); }
+
+  /* ── LIVING GRID ── */
+  .living { padding: 12vw 0; background: var(--paper); }
+  .living-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    margin-top: 3rem;
+  }
+  .living-item {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .living-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .living-item:hover img { transform: scale(1.06); }
+  .living-item-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26,22,18,0.88) 0%, transparent 55%);
+  }
+  .living-item-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1.2rem;
+    z-index: 1;
+  }
+  .living-item-icon { font-size: 1.4rem; margin-bottom: 0.3rem; }
+  .living-item-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 0.95rem;
+    color: var(--white);
+    font-weight: 600;
+  }
+  .living-item-desc {
+    font-size: 0.75rem;
+    color: rgba(253,250,245,0.68);
+    margin-top: 0.25rem;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* ── FLOOR PLAN ── */
+  .floorplan { padding: 12vw 0; background: var(--white); }
+  .floorplan-img { margin-top: 3rem; width: 100%; border: 1px solid var(--mist); }
+  .floorplan-img img { width: 100%; display: block; }
+
+  /* ── COURSE ── */
+  .course { padding: 12vw 0; background: var(--ink); }
+  .course .section-title { color: var(--white); }
+  .course .section-body { color: rgba(253,250,245,0.65); }
+  .course .section-label { color: var(--wood-light); }
+  .course-map { margin-top: 2.5rem; width: 100%; max-width: 500px; border: 1px solid rgba(255,255,255,0.1); }
+  .course-map img { width: 100%; display: block; }
+  .course-tabs {
+    display: flex;
+    margin-top: 3rem;
+    border-bottom: 1px solid rgba(253,250,245,0.15);
+  }
+  .course-tab {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.85rem;
+    color: rgba(253,250,245,0.45);
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+    font-family: 'Shippori Mincho', serif;
+  }
+  .course-tab.active { color: var(--wood-light); border-bottom-color: var(--accent); }
+  .course-content { display: none; }
+  .course-content.active { display: block; }
+  .course-days {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin-top: 2rem;
+    background: rgba(253,250,245,0.08);
+  }
+  .course-day { background: rgba(26,22,18,0.85); padding: 2rem 1.5rem; }
+  .course-day-label { font-size: 0.65rem; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 0.4rem; }
+  .course-day-theme {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1rem; color: var(--white);
+    font-weight: 600; margin-bottom: 1rem;
+  }
+  .course-day-items { list-style: none; }
+  .course-day-items li {
+    font-size: 0.8rem;
+    color: rgba(253,250,245,0.6);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(253,250,245,0.07);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+  .course-day-items li:last-child { border-bottom: none; }
+
+  /* ── REVIEWS ── */
+  .reviews { padding: 12vw 0; background: var(--white); }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .review-card { padding: 2rem; background: var(--paper); border-top: 3px solid var(--wood-light); }
+  .review-stars { color: var(--accent); font-size: 0.85rem; margin-bottom: 0.8rem; }
+  .review-text { font-size: 0.87rem; line-height: 1.9; color: #3a3028; font-weight: 300; margin-bottom: 1.2rem; }
+  .review-meta { font-size: 0.74rem; color: var(--wood); }
+
+  /* ── PRICING ── */
+  .pricing { padding: 12vw 0; background: var(--paper); }
+  .pricing-box {
+    background: var(--white);
+    border: 1px solid var(--mist);
+    padding: 3rem; margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  .pricing-label { font-family: 'Shippori Mincho', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .pricing-amount { font-family: 'Shippori Mincho', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; line-height: 1; }
+  .pricing-amount span { font-size: 0.9rem; font-weight: 400; color: #5a5048; margin-left: 0.3rem; }
+  .pricing-note { font-size: 0.8rem; color: #5a5048; margin-top: 0.7rem; line-height: 1.8; font-weight: 300; }
+  .discount-badge {
+    display: inline-block; background: var(--accent); color: var(--white);
+    font-size: 0.75rem; padding: 0.3em 0.9em;
+    letter-spacing: 0.1em; margin-top: 1rem;
+    font-family: 'Shippori Mincho', serif;
+  }
+  .pricing-perks { list-style: none; }
+  .pricing-perks li {
+    padding: 0.7rem 0; border-bottom: 1px solid var(--mist);
+    font-size: 0.88rem; display: flex; align-items: center; gap: 0.7rem; font-weight: 300;
+  }
+  .pricing-perks li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+  /* ── SUPPORT ── */
+  .support { padding: 12vw 0; background: var(--sea); }
+  .support .section-title { color: var(--white); }
+  .support .section-body { color: rgba(253,250,245,0.78); }
+  .support .section-label { color: rgba(253,250,245,0.55); }
+  .support-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; margin-top: 3rem;
+    background: rgba(253,250,245,0.12);
+  }
+  .support-item { background: rgba(74,124,142,0.55); padding: 2rem 1.2rem; text-align: center; transition: background 0.3s ease; }
+  .support-item:hover { background: rgba(74,124,142,0.85); }
+  .support-icon { font-size: 2rem; margin-bottom: 0.7rem; }
+  .support-title { font-family: 'Shippori Mincho', serif; font-size: 0.92rem; color: var(--white); font-weight: 600; margin-bottom: 0.5rem; }
+  .support-desc { font-size: 0.77rem; color: rgba(253,250,245,0.68); line-height: 1.7; font-weight: 300; }
+
+  /* ── CTA ── */
+  .cta-section {
+    position: relative; padding: 16vw 0;
+    background: var(--ink); text-align: center; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '余泊';
+    font-family: 'Shippori Mincho', serif;
+    font-size: 28vw; color: rgba(253,250,245,0.025);
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; white-space: nowrap;
+  }
+  .cta-section .section-title { color: var(--white); position: relative; z-index: 1; }
+  .cta-section .section-body { color: rgba(253,250,245,0.55); max-width: 480px; margin: 0 auto 3rem; position: relative; z-index: 1; }
+  .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+  .btn-primary {
+    display: inline-block; padding: 1em 2.5em;
+    background: var(--accent); color: var(--white);
+    font-family: 'Shippori Mincho', serif; font-size: 1rem;
+    letter-spacing: 0.12em; text-decoration: none; transition: all 0.3s ease;
+  }
+  .btn-primary:hover { background: #a5521f; transform: translateY(-2px); }
+  .btn-secondary {
+    display: inline-block; padding: 1em 2.5em;
+    border: 1px solid rgba(253,250,245,0.35); color: rgba(253,250,245,0.78);
+    font-family: 'Shippori Mincho', serif; font-size: 1rem;
+    letter-spacing: 0.12em; text-decoration: none; transition: all 0.3s ease;
+  }
+  .btn-secondary:hover { border-color: var(--white); color: var(--white); }
+
+  /* ── FAQ ── */
+  .faq { padding: 12vw 0; background: var(--paper); }
+  .faq-list { margin-top: 3rem; }
+  .faq-item { border-bottom: 1px solid var(--mist); }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 0; cursor: pointer;
+    font-family: 'Shippori Mincho', serif; font-size: 1rem; font-weight: 600; gap: 1rem;
+  }
+  .faq-icon {
+    width: 26px; height: 26px;
+    border: 1px solid var(--wood-light); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; color: var(--wood); flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .faq-item.open .faq-a { max-height: 200px; }
+  .faq-a-inner { padding-bottom: 1.5rem; font-size: 0.9rem; line-height: 1.9; color: #5a5048; font-weight: 300; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--ink); padding: 4rem 6vw 3rem; text-align: center; }
+  .footer-logo { font-family: 'Shippori Mincho', serif; font-size: 1.8rem; color: var(--white); letter-spacing: 0.25em; margin-bottom: 0.5rem; }
+  .footer-tagline { font-size: 0.72rem; color: rgba(253,250,245,0.35); letter-spacing: 0.2em; margin-bottom: 2rem; }
+  .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+  .footer-links a { font-size: 0.8rem; color: rgba(253,250,245,0.45); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s ease; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy { font-size: 0.68rem; color: rgba(253,250,245,0.2); letter-spacing: 0.1em; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .concept-grid { grid-template-columns: 1fr; }
+    .photo-split { grid-template-columns: 1fr; }
+    .photo-split-img { min-height: 50vw; }
+    .living-grid { grid-template-columns: repeat(2, 1fr); }
+    .course-days { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .pricing-box { grid-template-columns: 1fr; gap: 2rem; }
+    .support-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .living-grid { grid-template-columns: 1fr 1fr; }
+    .cta-buttons { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-badge">
+    <div class="hero-badge-main">余　泊</div>
+    <div class="hero-badge-sub">YOHAKU — NAGASAKI</div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">長崎・大村湾を望む一日一組の古民家</p>
+    <h1 class="hero-title">
+      泊まるのではなく、<br>
+      <em>暮らす。</em>
+    </h1>
+    <p class="hero-sub">
+      昭和の木造平屋に住むように過ごす数日間。<br>
+      縁側から眺める大村湾の夕日。<br>
+      キッチンで地元の食材を料理して、和室に眠る。<br>
+      これは旅ではなく、日本の暮らしの体験です。
+    </p>
+    <a href="#booking" class="hero-cta">予約する →</a>
+  </div>
+</section>
+
+<!-- ── AFFINITY ── -->
+<section class="affinity">
+  <div class="section-inner">
+    <p class="section-label reveal">PROBLEM</p>
+    <h2 class="section-title reveal">「また同じホテル」<br>では感じられない、<br>本物の日本がある。</h2>
+    <div class="affinity-quote reveal">
+      「どこに泊まっても同じ部屋、同じ朝食。<br>
+      日本らしさって、どこにあるんだろう？」
+    </div>
+    <p class="section-body reveal">
+      有名な観光地はもう行った。チェーンホテルの快適さも知っている。<br>
+      それでも、旅から帰ってきたとき「あの場所で暮らしていた」と感じるような、<br>
+      そんな体験がずっと見つからなかった——。<br><br>
+      余泊はそんな旅人のために、ある一軒の家を用意しました。<br>
+      一日に一組だけが過ごす、大村湾を望む古民家です。
+    </p>
+  </div>
+</section>
+
+<!-- ── PHOTO SPLIT: EXTERIOR ── -->
+<div class="photo-split">
+  <div class="photo-split-img">
+    <img src="exterior.jpg" alt="余泊 外観" loading="lazy">
+  </div>
+  <div class="photo-split-text">
+    <p class="section-label">YOHAKU</p>
+    <h2 class="section-title">一棟まるごと、<br>あなただけの家。</h2>
+    <p class="section-body">
+      白い暖簾をくぐれば、そこはもう「自分の家」。<br>
+      チェックアウトの時間まで、誰にも邪魔されない<br>
+      プライベートな時間と空間がひろがっています。
+    </p>
+  </div>
+</div>
+
+<!-- ── CONCEPT ── -->
+<section class="concept">
+  <div class="section-inner">
+    <p class="section-label reveal">SOLUTION</p>
+    <h2 class="section-title reveal">「日本の住宅体験」×<br>「長崎周辺観光」。</h2>
+    <p class="section-body reveal">
+      一棟まるごとを貸し切り、日本の家での暮らしをそのまま体験する。<br>
+      そして余泊を拠点に、長崎の旅を自分のペースで巡る。
+    </p>
+    <div class="concept-grid reveal">
+      <div class="concept-card">
+        <div class="concept-number">01</div>
+        <div class="concept-card-title">暮らすように泊まる</div>
+        <div class="concept-card-body">104㎡の昭和木造平屋を一棟貸切。キッチン・和室・縁側・ワークスペースを自由に使って、まるで自分の家のように。</div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-number">02</div>
+        <div class="concept-card-title">海と夕日の特等席</div>
+        <div class="concept-card-body">大村湾を望む縁側は一日一組だけのプライベート空間。誰にも邪魔されない静けさの中で、海に沈む夕日をひとり占め。</div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-number">03</div>
+        <!-- ★ 波佐見焼・有田焼を追加 -->
+        <div class="concept-card-title">長崎を巡る拠点に</div>
+        <div class="concept-card-body">長崎空港から車で約15分。グラバー園・軍艦島・雲仙・ハウステンボス・波佐見焼・有田焼へのアクセスも提案。連泊するほど旅が豊かに。</div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-number">04</div>
+        <div class="concept-card-title">安心のサポート体制</div>
+        <div class="concept-card-body">多言語対応のチェックイン案内と周辺観光情報。日本語・英語・韓国語でのご質問・相談も歓迎です。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LIVING EXPERIENCE ── -->
+<section class="living">
+  <div class="section-inner">
+    <p class="section-label reveal">EXPERIENCE</p>
+    <h2 class="section-title reveal">余泊の暮らし</h2>
+    <p class="section-body reveal">
+      使い込まれた木の温もり、畳の香り、縁側から差し込む光。<br>
+      余泊の一日は、ここにしかない感触に満ちています。
+    </p>
+  </div>
+  <div class="living-grid reveal" style="margin-top:3rem;">
+    <!-- 居間 -->
+    <div class="living-item">
+      <img src="living.jpg" alt="居間・和室" loading="lazy">
+      <div class="living-item-overlay"></div>
+      <div class="living-item-info">
+        <div class="living-item-icon">🛋️</div>
+        <div class="living-item-name">居間・和室</div>
+        <div class="living-item-desc">畳と木に囲まれた、日本の時間が流れる空間。</div>
+      </div>
+    </div>
+    <!-- ★ 縁側・海の眺め → engawa-sea.jpg に変更 -->
+    <div class="living-item">
+      <img src="engawa-sea.jpg" alt="縁側・海の眺め" loading="lazy">
+      <div class="living-item-overlay"></div>
+      <div class="living-item-info">
+        <div class="living-item-icon">🌊</div>
+        <div class="living-item-name">縁側・海の眺め</div>
+        <div class="living-item-desc">窓の向こうに広がる大村湾。朝も夜も、ここだけの景色。</div>
+      </div>
+    </div>
+    <!-- ★ キッチン → kitchen.jpg に変更 -->
+    <div class="living-item">
+      <img src="kitchen.jpg" alt="キッチン" loading="lazy">
+      <div class="living-item-overlay"></div>
+      <div class="living-item-info">
+        <div class="living-item-icon">🍳</div>
+        <div class="living-item-name">キッチン</div>
+        <div class="living-item-desc">地元の食材で料理できる本格キッチン。近くのスーパーで買い出しを。</div>
+      </div>
+    </div>
+    <!-- ★ 露天風呂 → bath.jpg に変更 -->
+    <div class="living-item">
+      <img src="bath.jpg" alt="露天風呂" loading="lazy">
+      <div class="living-item-overlay"></div>
+      <div class="living-item-info">
+        <div class="living-item-icon">♨️</div>
+        <div class="living-item-name">露天風呂</div>
+        <div class="living-item-desc">旅の疲れをほぐす開放的なお風呂。夜空を見上げながら。</div>
+      </div>
+    </div>
+    <!-- ★ ワークスペース → workspace.jpg に変更 -->
+    <div class="living-item">
+      <img src="workspace.jpg" alt="ワークスペース" loading="lazy">
+      <div class="living-item-overlay"></div>
+      <div class="living-item-info">
+        <div class="living-item-icon">💻</div>
+        <div class="living-item-name">ワークスペース</div>
+        <div class="living-item-desc">旅しながら仕事もできる環境。長期滞在にも対応。</div>
+      </div>
+    </div>
+    <!-- ★ プライベート庭 → garden.jpg に変更 -->
+    <div class="living-item">
+      <img src="garden.jpg" alt="プライベート庭" loading="lazy">
+      <div class="living-item-overlay"></div>
+      <div class="living-item-info">
+        <div class="living-item-icon">🏡</div>
+        <div class="living-item-name">プライベート庭</div>
+        <div class="living-item-desc">一棟貸切だから、庭も玄関もすべてあなただけのもの。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PHOTO SPLIT: BAY DUSK ── -->
+<div class="photo-split">
+  <div class="photo-split-text" style="background:#2d3a28;">
+    <p class="section-label" style="color:rgba(196,168,130,0.7);">SUNSET</p>
+    <h2 class="section-title" style="color:var(--white);">一日の終わりを、<br>大村湾とともに。</h2>
+    <p class="section-body" style="color:rgba(253,250,245,0.68);">
+      夕方、縁側に腰をおろして海を眺める。<br>
+      空がオレンジに染まり、水面が揺れる。<br>
+      このために、ここに来た——そう思える瞬間が待っています。
+    </p>
+  </div>
+  <div class="photo-split-img">
+    <img src="bay-dusk.jpg" alt="大村湾の夕日" loading="lazy">
+  </div>
+</div>
+
+<!-- ── FLOOR PLAN ── -->
+<section class="floorplan">
+  <div class="section-inner">
+    <p class="section-label reveal">FLOOR PLAN</p>
+    <h2 class="section-title reveal">104㎡の一棟を、<br>まるごとあなたへ。</h2>
+    <p class="section-body reveal">
+      和室2間・居間・キッチン・浴室・書斎・露天風呂。<br>
+      広縁（縁側）から大村湾を一望できる、昭和の木造平屋。
+    </p>
+    <div class="floorplan-img reveal">
+      <img src="floorplan.jpg" alt="余泊 間取り図" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ── MODEL COURSE ── -->
+<section class="course">
+  <div class="section-inner">
+    <p class="section-label reveal">MODEL COURSE</p>
+    <h2 class="section-title reveal">余泊を拠点に、<br>長崎を巡る。</h2>
+    <p class="section-body reveal">
+      長崎空港から車で約15分の好立地。南に長崎市内、北にハウステンボス。<br>
+      波佐見焼・有田焼のショッピングも楽しめます。連泊するほど、旅の密度が上がります。
+    </p>
+    <div class="course-map reveal">
+      <img src="map-nagasaki.jpg" alt="長崎周辺マップ" loading="lazy">
+    </div>
+    <div class="course-tabs reveal">
+      <div class="course-tab active" onclick="showCourse('2n3d',this)">2泊3日</div>
+      <div class="course-tab" onclick="showCourse('1n2d',this)">1泊2日</div>
+      <div class="course-tab" onclick="showCourse('3n4d',this)">3泊4日</div>
+    </div>
+
+    <!-- ★ 2泊3日 -->
+    <div id="course-2n3d" class="course-content active reveal">
+      <div class="course-days">
+        <div class="course-day">
+          <div class="course-day-label">DAY 1</div>
+          <div class="course-day-theme">暮らしはじめる日</div>
+          <ul class="course-day-items">
+            <li>長崎空港着 → チェックイン（約15分）</li>
+            <li>近くのスーパーで地元の食材を買い出し</li>
+            <li>縁側で大村湾の夕日を眺める</li>
+            <li>キッチンで自炊を楽しむ</li>
+            <!-- ★「和室に布団を敷いて就寝」削除 -->
+          </ul>
+        </div>
+        <div class="course-day">
+          <div class="course-day-label">DAY 2</div>
+          <div class="course-day-theme">長崎市内・異国情緒</div>
+          <ul class="course-day-items">
+            <li>グラバー園・大浦天主堂（世界遺産）</li>
+            <li>出島・眼鏡橋を散歩</li>
+            <li>新地中華街でちゃんぽん</li>
+            <li>稲佐山から長崎の夜景を一望</li>
+            <li>余泊に戻り夜を過ごす</li>
+          </ul>
+        </div>
+        <div class="course-day">
+          <div class="course-day-label">DAY 3</div>
+          <div class="course-day-theme">北へ・帰路</div>
+          <ul class="course-day-items">
+            <li>ハウステンボスを半日観光</li>
+            <!-- ★「大村湾岸をドライブ」→「波佐見焼・有田焼でショッピング」に変更 -->
+            <li>波佐見焼・有田焼でショッピング</li>
+            <li>長崎空港から出発</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ★ 1泊2日 -->
+    <div id="course-1n2d" class="course-content">
+      <div class="course-days">
+        <div class="course-day">
+          <div class="course-day-label">DAY 1</div>
+          <div class="course-day-theme">長崎を凝縮して楽しむ</div>
+          <ul class="course-day-items">
+            <li>長崎空港着 → チェックイン</li>
+            <li>グラバー園・大浦天主堂へ</li>
+            <li>新地中華街でディナー</li>
+            <li>稲佐山の夜景</li>
+            <li>余泊に帰宅・就寝</li>
+          </ul>
+        </div>
+        <div class="course-day">
+          <div class="course-day-label">DAY 2</div>
+          <div class="course-day-theme">朝の余泊・帰路</div>
+          <ul class="course-day-items">
+            <li>縁側で朝の大村湾を眺める</li>
+            <li>ゆっくり朝食・チェックアウト</li>
+            <li>大村湾岸ドライブ</li>
+            <li>長崎空港から出発</li>
+          </ul>
+        </div>
+        <div class="course-day" style="opacity:0.35;">
+          <div class="course-day-label">OPTION</div>
+          <div class="course-day-theme">連泊でさらに充実</div>
+          <ul class="course-day-items">
+            <li>雲仙温泉（約90分）</li>
+            <!-- ★「軍艦島ツアー」→「波佐見焼・有田焼でショッピング」に変更 -->
+            <li>波佐見焼・有田焼でショッピング</li>
+            <li>ハウステンボス観光</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ★ 3泊4日 -->
+    <div id="course-3n4d" class="course-content">
+      <div class="course-days">
+        <div class="course-day">
+          <div class="course-day-label">DAY 1</div>
+          <div class="course-day-theme">暮らしはじめる日</div>
+          <ul class="course-day-items">
+            <li>到着・チェックイン・買い出し</li>
+            <li>縁側でゆったり過ごす</li>
+            <li>キッチンで夕食を自炊</li>
+          </ul>
+        </div>
+        <div class="course-day">
+          <div class="course-day-label">DAY 2</div>
+          <!-- ★「平和公園・長崎原爆資料館」→「眼鏡橋・長崎ランタンフェスティバル周辺」に変更 -->
+          <div class="course-day-theme">長崎市内・異国情緒</div>
+          <ul class="course-day-items">
+            <li>グラバー園・出島・眼鏡橋</li>
+            <li>新地中華街でランチ</li>
+            <li>長崎水辺の森公園・旧居留地散策</li>
+            <li>稲佐山の夜景</li>
+          </ul>
+        </div>
+        <div class="course-day">
+          <div class="course-day-label">DAY 3</div>
+          <!-- ★「雲仙・大自然」→「波佐見焼・有田焼とハウステンボス」に変更 -->
+          <div class="course-day-theme">やきもの街道とハウステンボス</div>
+          <ul class="course-day-items">
+            <li>波佐見焼・有田焼の窯元めぐり</li>
+            <li>ショッピング・ギャラリー鑑賞</li>
+            <li>佐世保バーガーでランチ</li>
+            <li>余泊に戻り、縁側で夕焼け</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── REVIEWS ── -->
+<section class="reviews">
+  <div class="section-inner">
+    <p class="section-label reveal">GUEST VOICES</p>
+    <h2 class="section-title reveal">泊まった方の声</h2>
+    <div class="reviews-grid reveal">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">縁側から眺める大村湾の夕日が忘れられません。ホテルでは絶対に味わえない「家にいる感覚」があって、旅なのに不思議と落ち着きました。</p>
+        <div class="review-meta">🇰🇷 韓国・ソウル｜2名｜2025年3月</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">キッチンで地元のスーパーで買った食材を料理して食べた夕食が最高でした。4人で一棟借りると一人あたりもリーズナブルで全員大満足。</p>
+        <div class="review-meta">🇰🇷 韓国・釜山｜4名｜2025年4月</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">長崎空港からすぐの立地なのに、静かで自然に囲まれていてびっくり。2泊しましたが、長崎市内もハウステンボスも無理なく行けて効率的でした。</p>
+        <div class="review-meta">🇯🇵 東京｜2名｜2025年11月</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section class="pricing">
+  <div class="section-inner">
+    <p class="section-label reveal">PRICING</p>
+    <h2 class="section-title reveal">料金・連泊割引</h2>
+    <div class="pricing-box reveal">
+      <div>
+        <div class="pricing-label">1棟貸切・1泊</div>
+        <div class="pricing-amount">¥40,000〜<span>/ 棟</span></div>
+        <p class="pricing-note">
+          ※シーズン・人数により変動します。<br>
+          4名で割ると 1人あたり¥10,000〜。<br>
+          グループ利用でコストパフォーマンス◎
+        </p>
+        <div class="discount-badge">連泊割引あり</div>
+        <p class="pricing-note" style="margin-top:0.8rem;">
+          2泊以上でご予約いただくと割引が適用されます。<br>
+          詳細は予約サイト・直接お問い合わせください。
+        </p>
+      </div>
+      <div>
+        <ul class="pricing-perks">
+          <li>1棟まるごと貸切（最大6名）</li>
+          <li>フルキッチン・調理器具完備</li>
+          <li>和室2間・居間・縁側すべて使用可</li>
+          <li>露天風呂・浴室完備</li>
+          <li>ワークスペース・Wi-Fi完備</li>
+          <li>多言語対応チェックイン案内</li>
+          <li>駐車場無料</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SUPPORT ── -->
+<section class="support">
+  <div class="section-inner">
+    <p class="section-label reveal">SUPPORT</p>
+    <h2 class="section-title reveal">言葉の壁がない滞在を。</h2>
+    <p class="section-body reveal">海外からのゲストにも安心して余泊を楽しんでいただけるよう、多言語でのサポートを用意しています。</p>
+    <div class="support-grid reveal">
+      <div class="support-item">
+        <div class="support-icon">📋</div>
+        <div class="support-title">多言語チェックイン案内</div>
+        <div class="support-desc">日本語・英語・韓国語対応の案内資料を準備。スムーズに入居できます。</div>
+      </div>
+      <div class="support-item">
+        <div class="support-icon">🗺️</div>
+        <div class="support-title">周辺観光情報</div>
+        <div class="support-desc">長崎の見どころ・アクセス方法・おすすめスポットをまとめた資料を提供。</div>
+      </div>
+      <div class="support-item">
+        <div class="support-icon">💬</div>
+        <div class="support-title">多言語問い合わせ対応</div>
+        <div class="support-desc">日本語・英語・韓国語でご質問・相談をお受けします。</div>
+      </div>
+      <div class="support-item">
+        <div class="support-icon">🚗</div>
+        <div class="support-title">アクセスサポート</div>
+        <div class="support-desc">長崎空港から車で約15分。電車・バスでのアクセス方法もご案内します。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA / BOOKING ── -->
+<section class="cta-section" id="booking">
+  <div class="section-inner">
+    <p class="section-label" style="color:rgba(253,250,245,0.35);position:relative;z-index:1;">BOOKING</p>
+    <h2 class="section-title">一日一組だけの家が、<br>あなたを待っています。</h2>
+    <p class="section-body">
+      予約はご希望の日程が埋まる前に。<br>
+      特に韓国の大型連休シーズンは早めのご予約をおすすめします。
+    </p>
+    <div class="cta-buttons">
+      <!-- ★ Booking.com リンク更新 -->
+      <a href="https://www.booking.com/hotel/jp/yohaku.ja.html?aid=356980&label=gog235jc-10CAsodUIGeW9oYWt1SBVYA2h1iAEBmAEzuAEXyAEM2AED6AEB-AEBiAIBqAIBuALqys7QBsACAdICJDA3YjU2ODg3LWRkOTktNDk5Ny05YjNkLTUxMzE1NjhkZmJlZdgCAeACAQ&sid=f8984f2ce9277d28c3fded207805d987&dest_id=-240631&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=1&hpos=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1779672436&srpvid=f3a30a35955a012a&type=total&ucfs=1&" class="btn-primary" target="_blank">Booking.comで予約する</a>
+      <!-- ★「Airbnb」→「公式サイトで予約」リンク更新 -->
+      <a href="https://reserve.489ban.net/client/yohaku-stay/0/plan/id/173077/stay" class="btn-secondary" target="_blank">公式サイトで予約する</a>
+    </div>
+    <p style="margin-top:1.5rem;font-size:0.8rem;color:rgba(253,250,245,0.3);position:relative;z-index:1;letter-spacing:0.05em;">
+      直接予約・お問い合わせは各予約サイトのメッセージ機能からどうぞ
+    </p>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq">
+  <div class="section-inner">
+    <p class="section-label reveal">FAQ</p>
+    <h2 class="section-title reveal">よくある質問</h2>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>何名まで泊まれますか？</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">最大6名までご利用いただけます。家族・友人グループでの貸切に最適です。グループでご利用いただくと、1人あたりの料金もお得になります。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>英語・韓国語での対応は可能ですか？</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">はい、英語・韓国語でのご案内・お問い合わせ対応が可能です。チェックイン案内資料も多言語対応しています。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>長崎空港からのアクセスは？</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">長崎空港から車で約15分です。無料駐車場を完備しています。電車・バスでのアクセス方法については、予約確定後に詳しいご案内をお送りします。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>食事は自炊のみですか？</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">フルキッチンを完備していますので自炊が可能です。また、車で数分のスーパーや、近隣のレストランもご利用いただけます。朝食・夕食の提供はございません。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>連泊割引はありますか？</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">2泊以上でご予約の場合、割引が適用されます。長崎市内・波佐見焼・有田焼・ハウステンボスなど周辺観光を組み合わせる2〜3泊のご滞在がおすすめです。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>クレジットカードは使えますか？</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">各予約サイト（Booking.com等）経由でのお支払いは、各サイトの決済方法に準じます。クレジットカード・PayPal等でお支払いいただけます。</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">余 泊</div>
+  <div class="footer-tagline">YOHAKU — 長崎・大村湾を望む一日一組の古民家</div>
+  <div class="footer-links">
+    <a href="https://www.booking.com/hotel/jp/yohaku.ja.html?aid=356980&label=gog235jc-10CAsodUIGeW9oYWt1SBVYA2h1iAEBmAEzuAEXyAEM2AED6AEB-AEBiAIBqAIBuALqys7QBsACAdICJDA3YjU2ODg3LWRkOTktNDk5Ny05YjNkLTUxMzE1NjhkZmJlZdgCAeACAQ&sid=f8984f2ce9277d28c3fded207805d987&dest_id=-240631&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=1&hpos=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1779672436&srpvid=f3a30a35955a012a&type=total&ucfs=1&" target="_blank">Booking.com</a>
+    <a href="https://reserve.489ban.net/client/yohaku-stay/0/plan/id/173077/stay" target="_blank">公式サイト予約</a>
+    <a href="https://yohaku-stay.com" target="_blank">余泊公式サイト</a>
+    <a href="#booking">予約する</a>
+  </div>
+  <div class="footer-copy">© 2026 余泊 Yohaku. All rights reserved.</div>
+</footer>
+
+<script>
+function showCourse(id, tab) {
+  document.querySelectorAll('.course-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.course-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('course-' + id).classList.add('active');
+  tab.classList.add('active');
+}
+function toggleFaq(qEl) {
+  const item = qEl.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
