@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root { --ink:#1a1612; --paper:#f5f0e8; --sea:#4a7c8e; --wood:#8b6f47; --wood-light:#c4a882; --mist:#e8e0d0; --white:#fdfaf5; --accent:#c0622d; }
-  *{margin:0;padding:0;box-sizing:border-box;} html{scroll-behavior:smooth;scroll-padding-top:60px;}
+  *{margin:0;padding:0;box-sizing:border-box;} html{scroll-behavior:smooth;}
   body{font-family:'Noto Sans JP',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden;}
   .hero{position:relative;height:100svh;min-height:600px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;}
   .hero-bg{position:absolute;inset:0;background-image:url('hero-bg.jpg');background-size:cover;background-position:center 50%;transform:scale(1.05);animation:slowZoom 20s ease-in-out infinite alternate;}
@@ -156,7 +156,7 @@
     <p class="hero-eyebrow">長崎・大村湾を望む一日一組の古民家</p>
     <h1 class="hero-title">泊まるのではなく、<br><em>暮らす。</em></h1>
     <p class="hero-sub">昭和の木造平屋に住むように過ごす数日間。<br>縁側から眺める大村湾の夕日。<br>キッチンで地元の食材を料理して、和室に眠る。<br>これは旅ではなく、日本の暮らしの体験です。</p>
-    <a href="#booking" class="hero-cta">予約する →</a>
+    <a href="#booking" class="hero-cta" onclick="event.preventDefault();document.getElementById('booking').scrollIntoView({behavior:'smooth'});">予約する →</a>
   </div>
 </section>
 

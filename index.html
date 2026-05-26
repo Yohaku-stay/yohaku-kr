@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{--ink:#1a1612;--paper:#f5f0e8;--sea:#4a7c8e;--wood:#8b6f47;--wood-light:#c4a882;--mist:#e8e0d0;--white:#fdfaf5;--accent:#c0622d;}
-  *{margin:0;padding:0;box-sizing:border-box;} html{scroll-behavior:smooth;scroll-padding-top:60px;}
+  *{margin:0;padding:0;box-sizing:border-box;} html{scroll-behavior:smooth;}
   body{font-family:'Noto Sans KR',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden;}
 
   /* LANG SWITCHER */
@@ -187,7 +187,7 @@
     <p class="hero-eyebrow">나가사키 · 오무라만을 바라보는 하루 한 팀만의 고민가</p>
     <h1 class="hero-title">묵는 것이 아니라,<br><em>살아보는 것.</em></h1>
     <p class="hero-sub">쇼와 시대의 목조 단층집에서 살듯이 머무는 며칠간.<br>縁側（엔가와）에서 바라보는 오무라만의 석양.<br>부엌에서 현지 식재료로 요리하고, 다다미방에서 잠드는 것.<br>이것은 여행이 아니라, 일본 일상의 체험입니다.</p>
-    <a href="#booking" class="hero-cta">예약하기 →</a>
+    <a href="#booking" class="hero-cta" onclick="event.preventDefault();document.getElementById('booking').scrollIntoView({behavior:'smooth'});">예약하기 →</a>
   </div>
 </section>
 
